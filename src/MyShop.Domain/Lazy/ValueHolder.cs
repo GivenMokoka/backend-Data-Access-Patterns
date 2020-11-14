@@ -5,6 +5,10 @@ using System.Text;
 namespace MyShop.Domain.Lazy
 {
     /*The Domain project doesn´t know anythings about the profile picture service
+     * The benefif of this approach is that we were no longer coupled to the way that we were loading 
+     * our data before the data is passed back to the consumer oof the repository, we´re goona hood on one of 
+     * these value holders so that one of the properties on our entity can make use of that value holder and lazy 
+     * loda the data as the consumer  request that
      */
     public interface IValueHolder<T>
     {

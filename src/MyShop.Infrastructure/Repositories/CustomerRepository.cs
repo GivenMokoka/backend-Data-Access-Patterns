@@ -18,9 +18,9 @@ namespace MyShop.Infrastructure.Repositories
         {
             return base.All().Select(s =>
             {
-                s.profilePictureValueHolder = new ValueHolder<byte[]>((parameter) =>
+                s.profilePictureValueHolder = new Lazy<byte[]>(() =>
                 {
-                    return ProfilePictureService.GetFor(parameter.ToString());
+                    return ProfilePictureService.GetFor(s.Name);
                 });
                 return s;
             });

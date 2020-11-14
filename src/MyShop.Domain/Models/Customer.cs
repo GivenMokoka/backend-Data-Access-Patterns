@@ -12,13 +12,14 @@ namespace MyShop.Domain.Models
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public IValueHolder<byte[]> profilePictureValueHolder { get; set; }
+        //Lazy<T> is a thread safe implementation
+        public Lazy<byte[]> profilePictureValueHolder { get; set; }
         
         public byte[] ProfilePicture
         {
             get
             {
-                return profilePictureValueHolder.GetValue(Name);
+                return profilePictureValueHolder.Value;
             }
            
         }
