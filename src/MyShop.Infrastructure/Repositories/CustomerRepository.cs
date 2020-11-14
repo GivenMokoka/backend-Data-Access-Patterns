@@ -1,4 +1,6 @@
-﻿using MyShop.Domain.Models;
+﻿using MyShop.Domain.Lazy;
+using MyShop.Domain.Models;
+using MyShop.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,19 @@ namespace MyShop.Infrastructure.Repositories
     {
         public CustomerRepository(ShoppingContext context) : base(context)
         {
+        }
+        //todo: Override the rest of the methods for retrieval in the repository to apply the value holder.
+        public override IEnumerable<Customer> All()
+        {
+            return base.All().Select(s =>
+            {
+                s.profilePictureValueHolder = new ValueHolder<byte[]>((parameter) =>
+                {
+                    return ProfilePictureService.GetFor(parameter.ToString());
+                });
+                return s;
+            });
+
         }
         public override Customer Update(Customer entity)
         {

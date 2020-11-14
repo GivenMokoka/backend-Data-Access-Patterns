@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MyShop.Domain
+namespace MyShop.Infrastructure.Services
 {
     public class ProfilePictureService
     {
