@@ -1,5 +1,5 @@
-﻿using MyShop.Domain.Lazy;
-using MyShop.Domain.Models;
+﻿using MyShop.Domain.Models;
+using MyShop.Infrastructure.Lazy.Proxies;
 using MyShop.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -16,14 +16,7 @@ namespace MyShop.Infrastructure.Repositories
         //todo: Override the rest of the methods for retrieval in the repository to apply the value holder.
         public override IEnumerable<Customer> All()
         {
-            return base.All().Select(s =>
-            {
-                s.profilePictureValueHolder = new Lazy<byte[]>(() =>
-                {
-                    return ProfilePictureService.GetFor(s.Name);
-                });
-                return s;
-            });
+            return base.All().Select(MapToProxy);
 
         }
         public override Customer Update(Customer entity)
@@ -38,6 +31,19 @@ namespace MyShop.Infrastructure.Repositories
             customer.Country = entity.Country;
 
             return base.Update(customer);
+        }
+
+        private CustomerProxy MapToProxy(Customer customer)
+        {
+            return new CustomerProxy
+            {
+                CustomerId = customer.CustomerId,
+                Name = customer.Name,
+                ShippingAddress = customer.ShippingAddress,
+                City = customer.City,
+                PostalCode = customer.PostalCode,
+                Country = customer.Country
+            };
         }
     }
 }

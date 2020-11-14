@@ -1,5 +1,4 @@
-﻿using MyShop.Domain.Lazy;
-using System;
+﻿using System;
 
 namespace MyShop.Domain.Models
 {
@@ -7,22 +6,13 @@ namespace MyShop.Domain.Models
     {
         public Guid CustomerId { get; set; }
 
-        public string Name { get; set; }
-        public string ShippingAddress { get; set; }
-        public string City { get; set; }
-        public string PostalCode { get; set; }
-        public string Country { get; set; }
-        //Lazy<T> is a thread safe implementation
-        public Lazy<byte[]> profilePictureValueHolder { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string ShippingAddress { get; set; }
+        public virtual string City { get; set; }
+        public virtual string PostalCode { get; set; }
+        public virtual string Country { get; set; }
         
-        public byte[] ProfilePicture
-        {
-            get
-            {
-                return profilePictureValueHolder.Value;
-            }
-           
-        }
+        public virtual byte[] ProfilePicture {get; set;}
 
 
         public Customer()
