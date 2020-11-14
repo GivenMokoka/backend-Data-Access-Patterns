@@ -2,7 +2,7 @@
 C# Design Patterns: Data Access Patterns:
 - Repository Pattern
 - Unit Work
-- Lazy load
+- Lazy load. See branches: Lazy_load_pattern/*
 
 **References:**
 
